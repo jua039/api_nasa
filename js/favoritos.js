@@ -1,35 +1,3 @@
-import { mostrarAPOD, obtenerAPODActual } from "./app.js";
-
-document.getElementById("btn-favorito").addEventListener("click", guardarFavorito);
-
-function guardarFavorito() {
-    const apodActual = obtenerAPODActual();
-
-    if (!apodActual) {
-        alert("No hay una imagen cargada para guardar.");
-        return;
-    }
-
-    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-
-    const existe = favoritos.some(
-        favorito => favorito.date === apodActual.date
-    );
-
-    if (!existe) {
-        favoritos.push(apodActual);
-
-        localStorage.setItem(
-            "favoritos",
-            JSON.stringify(favoritos)
-        );
-
-        mostrarFavoritos();
-    } else {
-        alert("Este APOD ya está en favoritos.");
-    }
-}
-
 export function mostrarFavoritos() {
     const lista = document.getElementById("lista-favoritos");
 
@@ -53,11 +21,28 @@ export function mostrarFavoritos() {
         li.style.cursor = "pointer";
 
         li.addEventListener("click", () => {
-            mostrarAPOD(favorito);
+            mostrarFavoritoGuardado(favorito);
         });
 
         lista.appendChild(li);
     });
+}
+
+function mostrarFavoritoGuardado(favorito) {
+    const pantalla = document.getElementById("pantalla-principal");
+
+    pantalla.innerHTML = `
+        <h2 class="text-info mb-3">${favorito.title || "Sin título"}</h2>
+        <p class="text-muted">${favorito.date || "Sin fecha"}</p>
+
+        ${
+            favorito.media_type === "image"
+                ? `<img src="${favorito.url}" class="img-fluid rounded mb-3" alt="${favorito.title || "APOD"}">`
+                : `<iframe src="${favorito.url}" class="w-100 mb-3" height="400" allowfullscreen></iframe>`
+        }
+
+        <p class="text-white text-start">${favorito.explanation || "Sin descripción disponible."}</p>
+    `;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
