@@ -8,7 +8,7 @@ export function mostrarFavoritos() {
     if (favoritos.length === 0) {
         const li = document.createElement("li");
         li.textContent = "No has guardado imágenes aún.";
-        li.className = "list-group-item bg-transparent text-muted small px-0";
+        li.className = "list-group-item bg-transparent text-white small px-0";
         lista.appendChild(li);
         return;
     }
@@ -33,7 +33,7 @@ function mostrarFavoritoGuardado(favorito) {
 
     pantalla.innerHTML = `
         <h2 class="text-info mb-3">${favorito.title || "Sin título"}</h2>
-        <p class="text-muted">${favorito.date || "Sin fecha"}</p>
+        <p class="text-white">${favorito.date || "Sin fecha"}</p>
 
         ${
             favorito.media_type === "image"
