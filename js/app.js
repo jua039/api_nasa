@@ -53,7 +53,7 @@ export function mostrarAPOD(data) {
     const pantalla = document.getElementById("pantalla-principal");
 
     if (!data) {
-        pantalla.innerHTML = `<p class="text-danger text-white ">No hay datos para mostrar.</p>`;
+        pantalla.innerHTML = `<p class="text-white ">No hay datos para mostrar.</p>`;
         return;
     }
 
