@@ -44,7 +44,7 @@ export async function cargarAPOD(fecha = "") {
 
         pantalla.innerHTML = `
             <p class="text-danger">Error al cargar la API.</p>
-            <p class="text-muted">${error.message}</p>
+            <p class="text-white">${error.message}</p>
         `;
     }
 }
