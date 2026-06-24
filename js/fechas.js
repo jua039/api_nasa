@@ -1,30 +1,37 @@
-let fecha = document.getElementById('selector-fecha')
+import { cargarAPOD } from "./app.js";
 
-let hoy = new Date();
-let anio = hoy.getFullYear();
-let mes = String(hoy.getMonth() + 1).padStart(2, '0');
-let dia = String(hoy.getDate()).padStart(2, '0');
-let fechaActual = `${anio}-${mes}-${dia}`;
+const fecha = document.getElementById("selector-fecha");
 
+const hoy = new Date();
+const anio = hoy.getFullYear();
+const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+const dia = String(hoy.getDate()).padStart(2, "0");
 
-function limitarPositivo(){
-    
+const fechaActual = `${anio}-${mes}-${dia}`;
+
+function limitarFecha() {
     fecha.max = fechaActual;
-    fecha.min = '1995-06-16'
+    fecha.min = "1995-06-16";
 }
 
-limitarPositivo();
+function validarFecha() {
+    const fechaAsignada = fecha.value;
 
-function validarFecha(){
-    let fechaAsignada = fecha.value;
-
-    if(fechaAsignada > fechaActual){
-        alert("Esta fecha no sirve")
-        fecha.value = "";
-    }else{
-        console.log("Redirigiendo");
-        
+    if (!fechaAsignada) {
+        return;
     }
+
+    if (fechaAsignada > fechaActual) {
+        alert("No puedes seleccionar una fecha futura.");
+        fecha.value = "";
+        return;
+    }
+
+    cargarAPOD(fechaAsignada);
 }
 
-validarFecha();
+limitarFecha();
+
+
+//validarFecha();
+fecha.addEventListener("change", validarFecha);
