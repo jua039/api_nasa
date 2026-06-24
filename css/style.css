@@ -1,0 +1,15 @@
+#video-fondo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -100;
+    object-fit: cover;
+}
+
+.card-custom {
+    background-color: rgba(22, 31, 48, 0.75) !important; /* Capa oscura translúcida */
+    border: 1px solid rgba(45, 55, 72, 0.4);
+    backdrop-filter: blur(10px); /* Efecto difuminado genial */
+}
